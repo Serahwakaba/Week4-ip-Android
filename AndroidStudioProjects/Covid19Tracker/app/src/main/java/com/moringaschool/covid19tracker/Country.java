@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Country extends AppCompatActivity {
-//    private TextView mLocationTextView;
-//    private ListView mListView;
+    private TextView mLocationTextView;
+    private ListView mListView;
 //    private String[] restaurants = new String[] {"Algeria","Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon",
 //            "Cabo Verde", "Central African Republic", "Chad", "Comoros", "Congo", "the Democratic Republic of Congo",
 //            "Cote d'Ivoire", "Djibouti", "Equatorial Guinea", "Egypt", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau"};
