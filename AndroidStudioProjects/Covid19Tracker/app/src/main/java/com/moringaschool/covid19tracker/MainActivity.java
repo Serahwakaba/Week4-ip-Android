@@ -24,19 +24,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
-//        ButterKnife.bind(this);
 ////        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
 ////        mFindCountrysButton = (Button) findViewById(R.id.mFindCountrysButton);
-//        mFindCountrysButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                String location = mLocationEditText.getText().toString();
-//                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
+        mFindCountrysButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String location = mLocationEditText.getText().toString();
+                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
 //                Intent intent = new Intent(MainActivity.this, Country.class);
 //                intent.putExtra("location", location);
 //                startActivity(intent);
-//            }
-//        });
-//    }
+            }
+        });
+    }
 }
