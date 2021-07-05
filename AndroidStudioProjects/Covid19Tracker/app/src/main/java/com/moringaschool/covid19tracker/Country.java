@@ -1,4 +1,4 @@
-package com.moringaschool.covid19tracker;
+gpackage com.moringaschool.covid19tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,9 +34,9 @@ public class Country extends AppCompatActivity {
                 Toast.makeText(Country.this, restaurant, Toast.LENGTH_LONG).show();
             }
         });
-//
-//        Intent intent = getIntent();
-//        String location = intent.getStringExtra("location");
-//        mLocationTextView.setText("Here are the countries affected by Covid19 in " + location);
-//    }
-//}
+
+        Intent intent = getIntent();
+        String location = intent.getStringExtra("location");
+        mLocationTextView.setText("Here are the countries affected by Covid19 in " + location);
+    }
+}
