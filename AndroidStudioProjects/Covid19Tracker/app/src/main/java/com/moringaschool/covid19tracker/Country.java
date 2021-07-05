@@ -1,4 +1,4 @@
-gpackage com.moringaschool.covid19tracker;
+package com.moringaschool.covid19tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,8 +25,8 @@ public class Country extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listView);
         mLocationTextView = (TextView) findViewById(R.id.locationTextView);
 
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants);
-//        mListView.setAdapter(adapter);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants);
+        mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
