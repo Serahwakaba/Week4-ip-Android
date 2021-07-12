@@ -1,16 +1,16 @@
-//package com.moringaschool.covid19tracker.adapter;
-//
-//import android.content.Context;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.TextView;
-//
-//import androidx.recyclerview.widget.RecyclerView;
-//
-//import com.moringaschool.covid19tracker.model.Countrymodel;
-//import com.moringaschool.covid19tracker.R;
-//
+package com.moringaschool.covid19tracker.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.moringaschool.covid19tracker.model.Countrymodel;
+import com.moringaschool.covid19tracker.R;
+
 
 import java.util.List;
 
@@ -65,13 +65,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.txtActive.setText(dataList.get(position).getActive());
         holder.txtCritical.setText(dataList.get(position).getCritical());
 
-        Picasso.Builder builder = new Picasso.Builder(context);
+       /* Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
         builder.build().load(dataList.get(position).getThumbnailUrl())
 
-                .into(holder.coverImage);
+                .into(holder.coverImage);*/
 
     }
+
     @Override
     public int getItemCount() {
         return dataList.size();
