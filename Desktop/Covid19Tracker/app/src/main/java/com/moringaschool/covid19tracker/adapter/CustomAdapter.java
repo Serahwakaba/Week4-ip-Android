@@ -23,17 +23,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         this.context = context;
         this.dataList = dataList;
     }
-//
-//    class CustomViewHolder extends RecyclerView.ViewHolder {
-//
-//        public final View mView;
-//
-//        TextView txtTitle, txtFlag,txtCountry,txtTodaycases,txtDeath,txtRecoverd,txtActive, txtCritical;
-//
-//
-//        CustomViewHolder(View itemView) {
-//            super(itemView);
-//            mView = itemView;
+
+    class CustomViewHolder extends RecyclerView.ViewHolder {
+
+        public final View mView;
+
+        TextView txtTitle, txtFlag,txtCountry,txtTodaycases,txtDeath,txtRecoverd,txtActive, txtCritical;
+
+
+        CustomViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
 //
 //            txtTitle = mView.findViewById(R.id.title);
 //            txtFlag = mView.findViewById(R.id.flag);
