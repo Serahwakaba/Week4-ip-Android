@@ -11,18 +11,18 @@
 //import com.moringaschool.covid19tracker.model.Countrymodel;
 //import com.moringaschool.covid19tracker.R;
 //
-//
-//import java.util.List;
-//
-//public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
-//
-//    private List<Countrymodel> dataList;
-//    private Context context;
-//
-//    public CustomAdapter(Context context,List<Countrymodel> dataList){
-//        this.context = context;
-//        this.dataList = dataList;
-//    }
+
+import java.util.List;
+
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
+
+    private List<Countrymodel> dataList;
+    private Context context;
+
+    public CustomAdapter(Context context,List<Countrymodel> dataList){
+        this.context = context;
+        this.dataList = dataList;
+    }
 //
 //    class CustomViewHolder extends RecyclerView.ViewHolder {
 //
