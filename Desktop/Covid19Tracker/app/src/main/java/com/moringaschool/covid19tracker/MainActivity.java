@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    /*Method to generate List of data using RecyclerView with custom adapter*/
-//    private void generateDataList(List<Countrymodel> photoList) {
-//        recyclerView = findViewById(R.id.customRecyclerView);
-//        adapter = new CustomAdapter(this,photoList);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(adapter);
+    /*Method to generate List of data using RecyclerView with custom adapter*/
+    private void generateDataList(List<Countrymodel> photoList) {
+        recyclerView = findViewById(R.id.customRecyclerView);
+        adapter = new CustomAdapter(this,photoList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 }
