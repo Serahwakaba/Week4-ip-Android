@@ -34,27 +34,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         CustomViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-//
-//            txtTitle = mView.findViewById(R.id.title);
-//            txtFlag = mView.findViewById(R.id.flag);
-//            txtCountry = mView.findViewById(R.id.country);
-//            txtTodaycases = mView.findViewById(R.id.todayCases);
-//            txtDeath = mView.findViewById(R.id.death);
-//            txtRecoverd = mView.findViewById(R.id.recoverd);
-//            txtActive = mView.findViewById(R.id.active);
-//            txtCritical = mView.findViewById(R.id.critical);
-//
-//
-//        }
-//    }
-//
-//    @Override
-//    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-//        View view = layoutInflater.inflate(R.layout.custom_row, parent, false);
-//        return new CustomViewHolder(view);
-//    }
-//
+
+            txtTitle = mView.findViewById(R.id.title);
+            txtFlag = mView.findViewById(R.id.flag);
+            txtCountry = mView.findViewById(R.id.country);
+            txtTodaycases = mView.findViewById(R.id.todayCases);
+            txtDeath = mView.findViewById(R.id.death);
+            txtRecoverd = mView.findViewById(R.id.recoverd);
+            txtActive = mView.findViewById(R.id.active);
+            txtCritical = mView.findViewById(R.id.critical);
+
+
+        }
+    }
+
+    @Override
+    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.custom_row, parent, false);
+        return new CustomViewHolder(view);
+    }
+
 //    @Override
 //    public void onBindViewHolder(CustomViewHolder holder, int position) {
 //        holder.txtFlag.setText(dataList.get(position).getFlag());
