@@ -55,26 +55,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return new CustomViewHolder(view);
     }
 
-//    @Override
-//    public void onBindViewHolder(CustomViewHolder holder, int position) {
-//        holder.txtFlag.setText(dataList.get(position).getFlag());
-//        holder.txtCountry.setText(dataList.get(position).getCountry());
-//        holder.txtTodaycases.setText(dataList.get(position).getTodayCases());
-//        holder.txtDeath.setText(dataList.get(position).getDeaths());
-//        holder.txtRecoverd.setText(dataList.get(position).getRecovered());
-//        holder.txtActive.setText(dataList.get(position).getActive());
-//        holder.txtCritical.setText(dataList.get(position).getCritical());
-//
-//       /* Picasso.Builder builder = new Picasso.Builder(context);
-//        builder.downloader(new OkHttp3Downloader(context));
-//        builder.build().load(dataList.get(position).getThumbnailUrl())
-//
-//                .into(holder.coverImage);*/
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return dataList.size();
-//    }
-//}
+    @Override
+    public void onBindViewHolder(CustomViewHolder holder, int position) {
+        holder.txtFlag.setText(dataList.get(position).getFlag());
+        holder.txtCountry.setText(dataList.get(position).getCountry());
+        holder.txtTodaycases.setText(dataList.get(position).getTodayCases());
+        holder.txtDeath.setText(dataList.get(position).getDeaths());
+        holder.txtRecoverd.setText(dataList.get(position).getRecovered());
+        holder.txtActive.setText(dataList.get(position).getActive());
+        holder.txtCritical.setText(dataList.get(position).getCritical());
+
+        Picasso.Builder builder = new Picasso.Builder(context);
+        builder.downloader(new OkHttp3Downloader(context));
+        builder.build().load(dataList.get(position).getThumbnailUrl())
+
+                .into(holder.coverImage);
+
+    }
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+}
