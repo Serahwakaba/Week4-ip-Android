@@ -18,6 +18,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private CustomAdapter adapter;
@@ -54,6 +56,24 @@ public class MainActivity extends AppCompatActivity {
     /*Method to generate List of data using RecyclerView with custom adapter*/
     private void generateDataList(List<Countrymodel> photoList) {
         recyclerView = findViewById(R.id.customRecyclerView);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://corona.lmao.ninja/v2/all/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        GetDataService getDataService = retrofit.create(GetDataService.class);
+        Call<List<Countrymodel>> call = getDataService.getAllCountries();
+        call.enqueue(new Callback<List<Countrymodel>>() {
+            @Override
+            public void onResponse(Call<List<Countrymodel>> call, Response<List<Countrymodel>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Countrymodel>> call, Throwable t) {
+                recyclerView.setText(t.getMessage())
+
+            }
+        });
         adapter = new CustomAdapter(this,photoList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
