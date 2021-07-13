@@ -72,9 +72,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 .into(holder.coverImage);*/
 
     }
-
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+
+
+
+
 }
