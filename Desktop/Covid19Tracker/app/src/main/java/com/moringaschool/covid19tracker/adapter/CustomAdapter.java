@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jakewharton.picasso.OkHttp3Downloader;
 import com.moringaschool.covid19tracker.model.Countrymodel;
 import com.moringaschool.covid19tracker.R;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
@@ -19,7 +21,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private List<Countrymodel> dataList;
     private Context context;
 
-    public CustomAdapter(Context context,List<Countrymodel> dataList){
+//    public CustomAdapter(Context context,List<Countrymodel> dataList){
+//        this.context = context;
+//        this.dataList = dataList;
+//    }
+
+    public CustomAdapter(List<Countrymodel> dataList,Context context) {
         this.context = context;
         this.dataList = dataList;
     }
@@ -28,7 +35,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         public final View mView;
 
-        TextView txtTitle, txtFlag,txtCountry,txtTodaycases,txtDeath,txtRecoverd,txtActive, txtCritical;
+   public TextView txtTitle, txtFlag,txtCountry,txtTodaycases,txtDeath,txtRecoverd,txtActive, txtCritical;
 
 
         CustomViewHolder(View itemView) {
@@ -57,6 +64,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
+        Countrymodel countrymodel = dataList.get(position);
+
         holder.txtFlag.setText(dataList.get(position).getFlag());
         holder.txtCountry.setText(dataList.get(position).getCountry());
         holder.txtTodaycases.setText(dataList.get(position).getTodayCases());
@@ -65,19 +74,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.txtActive.setText(dataList.get(position).getActive());
         holder.txtCritical.setText(dataList.get(position).getCritical());
 
-       /* Picasso.Builder builder = new Picasso.Builder(context);
-        builder.downloader(new OkHttp3Downloader(context));
-        builder.build().load(dataList.get(position).getThumbnailUrl())
+//        Picasso.Builder builder = new Picasso.Builder(context);
+//        builder.downloader(new OkHttp3Downloader(context));
+//        builder.build().load(dataList.get(position).getThumbnailUrl())
 
-                .into(holder.coverImage);*/
+//                .into(holder.coverImage);
 
     }
     @Override
     public int getItemCount() {
         return dataList.size();
     }
-
-
-
 
 }

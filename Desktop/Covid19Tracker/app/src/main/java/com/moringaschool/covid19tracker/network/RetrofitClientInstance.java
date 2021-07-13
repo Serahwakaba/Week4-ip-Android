@@ -8,13 +8,15 @@ public class RetrofitClientInstance {
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://corona.lmao.ninja/v2/all/";
 
-    public static Retrofit getRetrofitInstance() {
+    public static GetDataService getRetrofitInstance() {
         if (retrofit == null) {
-            retrofit = new retrofit2.Retrofit.Builder()
+//            retrofit = new retrofit2.Retrofit.Builder()
+            retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-        return retrofit;
+        return retrofit.create((GetDataService.class));
+//        return retrofit;
     }
 }
