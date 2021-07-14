@@ -31,6 +31,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         this.dataList = dataList;
     }
 
+    public CustomAdapter(List<Countrymodel> dataList) {
+    }
+
     class CustomViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
@@ -61,6 +64,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         View view = layoutInflater.inflate(R.layout.custom_row, parent, false);
         return new CustomViewHolder(view);
     }
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
@@ -81,9 +88,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 //                .into(holder.coverImage);
 
     }
-    @Override
-    public int getItemCount() {
-        return dataList.size();
-    }
+
 
 }

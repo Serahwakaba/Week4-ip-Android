@@ -40,16 +40,30 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CustomAdapter(dataList);
         recyclerView.setAdapter(adapter);
         fetchCountrymodel();
-        private void fetchCountrymodel(){
 
-        }
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
+    }
 
+        private void fetchCountrymodel(){
+            RetrofitClientInstance.getRetrofitInstance().getAllCountries().enqueue(new Callback<List<Countrymodel>>() {
+                @Override
+                public void onResponse(Call<List<Countrymodel>> call, Response<List<Countrymodel>> response) {
+                    if (response.isSuccessful() && response.body()!= null){
+                        dataList.addAll(response.body());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<List<Countrymodel>> call, Throwable t) {
+               Toast.makeText(MainActivity.this, "Error"+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
+        }
 //        /*Create handle for the RetrofitInstance interface*/
 //        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 //        Call<List<Countrymodel>> call = service.getAllCountries();
@@ -119,4 +133,3 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
     }
-}
