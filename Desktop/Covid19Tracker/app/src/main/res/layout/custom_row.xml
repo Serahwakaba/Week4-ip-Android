@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_friend"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardUseCompatPadding="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="title" />
+
+        <TextView
+            android:id="@+id/flag"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/title"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="flag" />
+
+        <TextView
+            android:id="@+id/country"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/flag"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="cases" />
+
+        <TextView
+            android:id="@+id/todayCases"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/country"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="todaycases" />
+
+        <TextView
+            android:id="@+id/death"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/todayCases"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="death" />
+
+        <TextView
+            android:id="@+id/recoverd"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:paddingTop="20dp"
+            android:layout_below="@+id/death"
+            android:lines="2"
+            android:text="recoverd" />
+
+        <TextView
+            android:id="@+id/active"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/recoverd"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="active" />
+
+        <TextView
+            android:id="@+id/critical"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/active"
+            android:paddingTop="20dp"
+            android:lines="2"
+            android:text="critical" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
