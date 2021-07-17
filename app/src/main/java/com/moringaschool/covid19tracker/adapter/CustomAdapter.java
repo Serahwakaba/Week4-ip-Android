@@ -4,96 +4,103 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import com.jakewharton.picasso.OkHttp3Downloader;
-import com.moringaschool.covid19tracker.model.Countrymodel;
-import com.moringaschool.covid19tracker.R;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
+public class MyCustomAdapter extends ArrayAdapter<CountryModel> {
 
-    private List<Countrymodel> dataList;
     private Context context;
+    private List<CountryModel> countryModelsList;
+    private List<CountryModel> countryModelsListFiltered;
 
+    public MyCustomAdapter( Context context, List<CountryModel> countryModelsList) {
+        super(context, R.layout.list_custom_item,countryModelsList);
 
-
-    public CustomAdapter(Context context) {
         this.context = context;
-    }
-
-
-//    public CustomAdapter(Context context,List<Countrymodel> dataList){
-//        this.context = context;
-//        this.dataList = dataList;
-//    }
-
-
-
-    public CustomAdapter(List<Countrymodel> dataList) {
-        this.dataList = dataList;
+        this.countryModelsList = countryModelsList;
+        this.countryModelsListFiltered = countryModelsList;
 
     }
 
-    class CustomViewHolder extends RecyclerView.ViewHolder {
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        public final View mView;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_custom_item,null,true);
+        TextView tvCountryName = view.findViewById(R.id.tvCountryName);
+        ImageView imageView = view.findViewById(R.id.imageFlag);
 
-   public TextView txtTitle, txtFlag,txtCountry,txtTodaycases,txtDeath,txtRecoverd,txtActive, txtCritical;
+        tvCountryName.setText(countryModelsListFiltered.get(position).getCountry());
+        Glide.with(context).load(countryModelsListFiltered.get(position).getFlag()).into(imageView);
 
-
-        CustomViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-
-            txtTitle = mView.findViewById(R.id.title);
-            txtFlag = mView.findViewById(R.id.flag);
-            txtCountry = mView.findViewById(R.id.country);
-            txtTodaycases = mView.findViewById(R.id.todayCases);
-            txtDeath = mView.findViewById(R.id.death);
-            txtRecoverd = mView.findViewById(R.id.recoverd);
-            txtActive = mView.findViewById(R.id.active);
-            txtCritical = mView.findViewById(R.id.critical);
-
-
-        }
+        return view;
     }
 
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.custom_row, parent, false);
-        return new CustomViewHolder(view);
+    public int getCount() {
+        return countryModelsListFiltered.size();
     }
+
+    @Nullable
     @Override
-    public int getItemCount() {
-        return dataList.size();
+    public CountryModel getItem(int position) {
+        return countryModelsListFiltered.get(position);
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
-        Countrymodel countrymodel = dataList.get(position);
-
-        holder.txtFlag.setText(dataList.get(position).getFlag());
-        holder.txtCountry.setText(dataList.get(position).getCountry());
-        holder.txtTodaycases.setText(dataList.get(position).getTodayCases());
-        holder.txtDeath.setText(dataList.get(position).getDeaths());
-        holder.txtRecoverd.setText(dataList.get(position).getRecovered());
-        holder.txtActive.setText(dataList.get(position).getActive());
-        holder.txtCritical.setText(dataList.get(position).getCritical());
-
-//        Picasso.Builder builder = new Picasso.Builder(context);
-//        builder.downloader(new OkHttp3Downloader(context));
-//        builder.build().load(dataList.get(position).getThumbnailUrl())
-
-//                .into(holder.coverImage);
-
+    public long getItemId(int position) {
+        return position;
     }
 
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
 
+                FilterResults filterResults = new FilterResults();
+                if(constraint == null || constraint.length() == 0){
+                    filterResults.count = countryModelsList.size();
+                    filterResults.values = countryModelsList;
+
+                }else{
+                    List<CountryModel> resultsModel = new ArrayList<>();
+                    String searchStr = constraint.toString().toLowerCase();
+
+                    for(CountryModel itemsModel:countryModelsList){
+                        if(itemsModel.getCountry().toLowerCase().contains(searchStr)){
+                            resultsModel.add(itemsModel);
+
+                        }
+                        filterResults.count = resultsModel.size();
+                        filterResults.values = resultsModel;
+                    }
+
+
+                }
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                countryModelsListFiltered = (List<CountryModel>) results.values;
+                AffectedCountries.countryModelsList = (List<CountryModel>) results.values;
+                notifyDataSetChanged();
+
+            }
+        };
+        return filter;
+    }
 }
