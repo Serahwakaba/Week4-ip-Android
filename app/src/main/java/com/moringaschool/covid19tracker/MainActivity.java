@@ -1,135 +1,126 @@
 package com.moringaschool.covid19tracker;
 
-import android.app.ProgressDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+//import com.leo.simplearcloader.SimpleArcLoader;
 
-import com.moringaschool.covid19tracker.adapter.CustomAdapter;
-import com.moringaschool.covid19tracker.model.Countrymodel;
-import com.moringaschool.covid19tracker.network.GetDataService;
-import com.moringaschool.covid19tracker.network.RetrofitClientInstance;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    ProgressDialog progressDialog;
-    LinearLayoutManager layoutManager;
-    CustomAdapter adapter;
-    List<Countrymodel> dataList = new ArrayList<>();
+    TextView tvCases, tvRecovered, tvCritical, tvActive, tvTodayCases, tvTotalDeaths, tvTodayDeaths, tvAffectedCountries;
+    //    SimpleArcLoader simpleArcLoader;
+    ScrollView scrollView;
+    PieChart pieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.customRecyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new CustomAdapter(dataList);
-        recyclerView.setAdapter(adapter);
-        fetchCountrymodel();
+
+        tvCases = findViewById(R.id.tvCases);
+        tvRecovered = findViewById(R.id.tvRecovered);
+        tvCritical = findViewById(R.id.tvCritical);
+        tvActive = findViewById(R.id.tvActive);
+        tvTodayCases = findViewById(R.id.tvTodayCases);
+        tvTotalDeaths = findViewById(R.id.tvTotalDeaths);
+        tvTodayDeaths = findViewById(R.id.tvTodayDeaths);
+        tvAffectedCountries = findViewById(R.id.tvAffectedCountries);
+
+//        simpleArcLoader = findViewById(R.id.loader);
+        scrollView = findViewById(R.id.scrollStats);
+        pieChart = findViewById(R.id.piechart);
 
 
-//        progressDialog = new ProgressDialog(MainActivity.this);
-//        progressDialog.setMessage("Loading....");
-//        progressDialog.show();
+        fetchData();
     }
 
-        private void fetchCountrymodel(){
-            RetrofitClientInstance.getRetrofitInstance().getAllCountries().enqueue(new Callback<List<Countrymodel>>() {
-                @Override
-                public void onResponse(Call<List<Countrymodel>> call, Response<List<Countrymodel>> response) {
-                    if (response.isSuccessful() && response.body()!= null){
-                        dataList.addAll(response.body());
-                        adapter.notifyDataSetChanged();
+    private void fetchData() {
+
+        String url = "https://corona.lmao.ninja/v2/all/";
+
+//        simpleArcLoader.start();
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString());
+
+                            tvCases.setText(jsonObject.getString("cases"));
+                            tvRecovered.setText(jsonObject.getString("recovered"));
+                            tvCritical.setText(jsonObject.getString("critical"));
+                            tvActive.setText(jsonObject.getString("active"));
+                            tvTodayCases.setText(jsonObject.getString("todayCases"));
+                            tvTotalDeaths.setText(jsonObject.getString("deaths"));
+                            tvTodayDeaths.setText(jsonObject.getString("todayDeaths"));
+                            tvAffectedCountries.setText(jsonObject.getString("affectedCountries"));
+
+
+                            pieChart.addPieSlice(new PieModel("Cases", Integer.parseInt(tvCases.getText().toString()), Color.parseColor("#FFA726")));
+                            pieChart.addPieSlice(new PieModel("Recoverd", Integer.parseInt(tvRecovered.getText().toString()), Color.parseColor("#66BB6A")));
+                            pieChart.addPieSlice(new PieModel("Deaths", Integer.parseInt(tvTotalDeaths.getText().toString()), Color.parseColor("#EF5350")));
+                            pieChart.addPieSlice(new PieModel("Active", Integer.parseInt(tvActive.getText().toString()), Color.parseColor("#29B6F6")));
+                            pieChart.startAnimation();
+
+//                            simpleArcLoader.stop();
+//                            simpleArcLoader.setVisibility(View.GONE);
+                            scrollView.setVisibility(View.VISIBLE);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+//                            simpleArcLoader.stop();
+//                            simpleArcLoader.setVisibility(View.GONE);
+                            scrollView.setVisibility(View.VISIBLE);
+                        }
+
+
                     }
-                }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                simpleArcLoader.stop();
+//                simpleArcLoader.setVisibility(View.GONE);
+                scrollView.setVisibility(View.VISIBLE);
+                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                @Override
-                public void onFailure(Call<List<Countrymodel>> call, Throwable t) {
-               Toast.makeText(MainActivity.this, "Error"+ t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
 
-        }
-//        /*Create handle for the RetrofitInstance interface*/
-//        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-//        Call<List<Countrymodel>> call = service.getAllCountries();
-//        call.enqueue(new Callback<List<Countrymodel>>() {
-//            @Override
-//            public void onResponse(Call<List<Countrymodel>> call, Response<List<Countrymodel>> response) {
-//                progressDialog.dismiss();
-//                generateDataList(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Countrymodel>> call, Throwable t) {
-//                progressDialog.dismiss();
-//                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//    /*Method to generate List of data using RecyclerView with custom adapter*/
-//    private void generateDataList(List<Countrymodel> countryList) {
-//        recyclerView = findViewById(R.id.customRecyclerView);
-//        adapter = new CustomAdapter(this,countryList);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(adapter);
-//
-//
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://corona.lmao.ninja/v2/all/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        GetDataService getDataService = retrofit.create(GetDataService.class);
-//        Call<List<Countrymodel>> call = getDataService.getAllCountries();
-//        call.enqueue(new Callback<List<Countrymodel>>() {
-//            @Override
-//            public void onResponse(Call<List<Countrymodel>> call, Response<List<Countrymodel>> response) {
-//                if (!response.isSuccessful()){
-//                    recyclerView.setAdapter(adapter);
-//                    return;
-//                }
-//           List<Countrymodel> Posts= response.body();
-//                for(int j=0;j<recyclerView.length();j++){
-////                    String content = "";
-////                    content += "flag: " +post.getFlag() + "\n";
-////                    content += "cases: " +post.getCases() + "\n";
-////                    content += "todayCases: " +post.getTodayCases() + "\n";
-////                    content += "deaths: " +post.getDeaths() + "\n";
-////                    recyclerView.append(content);
-//                    Countrymodel myListData = new Countrymodel();
-//                    myListData.setCases(myListData.getCases("cases"));
-//                    myListData.setDeaths(myListData.getCountry("deaths"));
-//                    myListData.setCritical(myListData.getCritical("critical));
-//                    myListData.setRecovered(myListData.getRecovered("recovered"));
-//                    myListData.setTodayCases(myListData.getFlag("todayCases"));
-//                    dataList.add(myListData);
-//
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Countrymodel>> call, Throwable t) {
-//                RecyclerView.setText(t.getMessage());
-//
-//            }
-//        });
 
     }
+
+
+    public void goTrackCountries(View view) {
+
+        startActivity(new Intent(getApplicationContext(), AffectedCountries.class));
+
+    }
+
+//    public void goSave(View view) {
+//
+//        startActivity(new Intent(MainActivity.this, Login.class));
+//
+//    }
+}

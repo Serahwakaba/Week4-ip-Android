@@ -1,4 +1,5 @@
-package com.moringaschool.covid19tracker.adapter;
+package com.moringaschool.covid19tracker;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
