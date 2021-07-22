@@ -13,6 +13,7 @@
         android:id="@+id/edtSearch"
         android:layout_margin="10dp"
         android:maxLines="1"
+        android:background="@color/black"
         android:singleLine="true"
         android:paddingLeft="10dp"
         android:hint="Search"
