@@ -6,7 +6,7 @@
     android:background="@drawable/corona">
 
     <ImageView
-        android:id="@+id/logo_id"
+        android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_centerInParent="true"
@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo_id"
+        android:layout_below="@+id/image_view"
         android:layout_centerHorizontal="true"
         android:text="Covid19 Worldwide"
         android:textSize="30dp"
