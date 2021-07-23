@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
     private static final String TAG = "Swipe Position";
     private  float x1,x2,y1,y2;
     private static int MIN_DISTANCE = 150;
+    private  GestureDetector gestureDetector;
 
     TextView tvCases, tvRecovered, tvCritical, tvActive, tvTodayCases, tvTotalDeaths, tvTodayDeaths, tvAffectedCountries;
     //    SimpleArcLoader simpleArcLoader;
