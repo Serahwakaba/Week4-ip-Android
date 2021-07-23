@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
     ScrollView scrollView;
     PieChart pieChart;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
 
         //initialize gesture detector
         this.gestureDetector = new GestureDetector(MainActivity.this, this);
+
+
 
         tvCases = findViewById(R.id.tvCases);
         tvRecovered = findViewById(R.id.tvRecovered);
@@ -60,6 +64,11 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
 
 
         fetchData();
+    }
+    //override on touch event
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
     }
 
     private void fetchData() {
