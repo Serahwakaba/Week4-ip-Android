@@ -68,6 +68,14 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
     //override on touch event
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        gestureDetector.onTouchEvent(event);
+
+        switch (event.getAction())
+        {
+            //starting  to swipe gesture
+            case MotionEvent.ACTION_DOWN:
+        }
         return super.onTouchEvent(event);
     }
 
