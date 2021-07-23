@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initialize gesture detector
+        this.gestureDetector = new GestureDetector(MainActivity.this, this);
+
         tvCases = findViewById(R.id.tvCases);
         tvRecovered = findViewById(R.id.tvRecovered);
         tvCritical = findViewById(R.id.tvCritical);
