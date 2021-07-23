@@ -78,6 +78,16 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
                 x1 = event.getX();
                 y1 = event.getY();
                 break;
+
+                //ending time swipe gesture
+            case  MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                y2 = event.getY();
+
+
+//                float valueX = x2 - x1;
+//                float valueY = y2 - y1;
+
         }
         return super.onTouchEvent(event);
     }
