@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -89,6 +90,31 @@ public class MainActivity extends AppCompatActivity  implements GestureDetector.
 
                // getting value for vertical swipe
                 float valueY = y2 - y1;
+                if(Math.abs(valueX) > MIN_DISTANCE){
+                    //Detect left to right swipe
+                    if (x2>x1){
+                        Toast.makeText(this,"Right is swiped ", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Right Swipe");
+                    }
+                    else {
+                        //detect right to left swipe
+                        Toast.makeText(this, "Left is swiped", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Left swipe");
+
+
+                    }}
+
+                else if(Math.abs(valueY) >  MIN_DISTANCE){
+                    //detect top to bottom swipe
+                    if (y2> y1){
+                        Toast.makeText(this, "bottom swipe", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Bottom swipe");
+
+
+                }
+
+                }
+
 
         }
         return super.onTouchEvent(event);
